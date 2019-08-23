@@ -154,7 +154,7 @@ body {
 
 .button_save:hover {
     box-shadow: #2F4FF9 0 0px 0px 40px inset;
-    border: none;
+    border: #2F4FF9 solid 0.5vw;
 }
 
 .card_container {
