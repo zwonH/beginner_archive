@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Olinka.com</title>
+	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:900|Pacifico&display=swap&subset=korean" rel="stylesheet">
+	<link rel="stylesheet" href="{{ url_for('static', filename='style1.css') }}">
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script>
+		function posting () {
+			let name = $('#posting-name').val();
+			let quantity = $('#posting-quantity').val();
+			let address = $('#posting-address').val();
+			let mobile = $('#posting-mobile').val();
+
+		$.ajax({
+			type: "POST",
+			url: "/order",
+			data: {name_give: name, quantity_give: quantity, address_give: address, mobile_give: mobile},
+			success: function(response){
+				if (response['result'] == 'success'){
+					alert (name + '님이 포토카드 ' + quantity +'개를 ' +address +'로 주문 성공!🐱 주문번호: '+ mobile);
+					window.location.reload();
+				} else {
+					alert ('주문 실패 🐣')
+				}
+			}
+		})
+		}
+	</script>
+
+
+
+
+</head>
+<body>
+
+
+<div class="page">
+	<div class="header">
+		<!--	<div id="logoWhite"></div>-->
+		<div class="logo">
+			<img src="static/images/logoWhite.png" id="logo" align="left"> <!--align은 html에....?! --> </div>
+		<div class="topBlueBox"></div>
+		<div id="textLogo">
+			<h1>OLINKA.com</h1>
+		</div>
+	</div>
+
+
+
+	<div class="container">
+		<!--<div class="box-1">
+		</div>-->
+
+
+		<div class="box">
+			<div class="card"><img src="static/images/card_2.png"></div>
+			<div class="card2"><img src="static/images/card_1.png"></div>
+			<div class="package"><img src="static/images/product.png"></div>
+
+<div class="lineBoxIn">
+		</div>
+<div class="lineBoxOut">
+		</div>
+	</div> <!--container-->
+
+
+
+	<div class="clr"></div>
+
+	<div class="twelve">
+		<h3>1 pack = 12 photos included!</h3>
+	</div>
+
+<div class="info">
+	<div class="name">
+		<h2>Olinka Photo Card ver.1</h2>
+	</div>
+
+	<div class="price">
+		<h4>12,000 won</h4>
+	</div>
+
+	<div class="cardframe">
+		<img src="static/images/cardframe.png">
+	</div>
+
+	<div class="explanation">
+	<p>올리의 첫번째 포토 카드입니다. 12장으로 구성되어있고, 퀄리티에 비해 가격은 무척 비쌉니다. 포토 카드를 아무리 많이 사도 고양이는 배송되지 않습니다.</p>
+	</div>
+</div> <!--info-->
+
+	<div class="clr"></div>
+
+<form class="orderForm">
+
+		<h2>Order Form</h2>
+
+		<div class="formGroup">
+			<label>Name:</label>
+			<input id = "posting-name" type="text" name="name" placeholder="What's your name?">
+		</div>
+
+		<div class="formGroup">
+			<label>Quantity:</label>
+			<input id= "posting-quantity" type="number" name="quantity" min="1" placeholder="多多益善">
+		</div>
+
+		<div class="formGroup">
+			<label>Address:</label>
+			<input id = "posting-address" type="text" name="address" placeholder="Where do you live?">
+		</div>
+
+		<div class="formGroup">
+			<label>Mobile:</label>
+			<input id = "posting-mobile" type="text" name="mobile" placeholder="010-XXXX-XXXX">
+		</div>
+		<div class="clr"></div>
+		<img class="submitButton" src="static/images/submit.png" onclick="posting()">
+
+</form>
+
+
+
+
+
+</div> <!-- page-->
+
+
+
+</body>
+</html>

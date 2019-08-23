@@ -1,0 +1,262 @@
+*{margin:0;
+padding:0;}
+
+.clr{
+	clear: both;
+}
+
+
+
+body{
+	font-family: 'Noto Sans KR', sans-serif;
+	background-color: #102DFF;
+	color: #fff;
+	margin-top: 0;
+}
+
+body h1, h2, h3, h4{
+	font-family: 'Pacifico', cursive;
+	}
+
+h1{
+	font-size: 68px;
+	font-weight:normal;
+
+
+}
+h2{
+	font-size: 60px;
+	font-weight:normal;
+
+
+}
+
+h3{	font-size: 50px;
+	font-weight:normal;
+
+
+}
+
+h4{	font-size: 40px;
+	font-weight:normal;
+
+
+}
+
+.page{
+	margin-top: 0px;
+	margin-left: 120px;
+	margin-right: 120px;
+}
+
+
+/**#logoWhite {
+	position: fixed;
+	width: 150px;
+	height:104px;
+	margin:0;
+	top:10px;
+	left: 10px;
+	background-image: url('../images/logoWhite.png');
+	background-size: 150px 104px;
+}**/
+.header{
+	position: fixed;
+	z-index: 5;
+}
+
+#textLogo{
+	position:fixed;
+	top:0px;
+}
+
+.topBlueBox{
+	width: 1500px;
+	height: 130px;
+	position: fixed;
+	top:0px;
+	background-color: #102DFF;
+}
+
+#logo{
+	width:100px;
+	height: auto;
+	position: fixed;
+	top: 20px;
+	left:8px;
+	margin:0px;
+}
+
+
+
+/**.box-1{
+	width: 80%;
+	height: 600px;
+	border:#fff 4px solid;
+	position: fixed;
+	top:135px;
+	left:125px;
+	box-sizing: border-box;
+}**/
+
+.lineBoxOut{
+	height: 810px;
+	width:1500px;
+	border:#fff 1px solid;
+	position:fixed;
+	top:130px;
+	left:120px;
+	box-sizing: border-box;
+	z-index: 2;
+}
+
+.lineBoxIn{
+	height: 790px;
+	width:1480px;
+	border:#fff 5px solid;
+	position:fixed;
+	top:140px;
+	left:130px;
+	box-sizing: border-box;
+	z-index: 3;
+}
+
+.container{
+	height: 700px;
+	width:1500px;
+
+	margin-top:120px;
+	left:120px;
+}
+
+.box{
+	float: left;
+	width:450px;
+	height:655px;
+	margin:50px auto;
+	position:relative;
+}
+
+.package{
+	position:absolute;
+	top:30px;
+	left:525px;
+}
+
+.card{
+	position:absolute;
+	top: 50px;
+	left:525px;
+}
+
+.card2{
+	position:absolute;
+	top: 50px;
+	left:525px;
+}
+
+.box:hover .package{transform: translateX(-200px); }
+.box:hover .card{transform: translateX(300px);
+	transition: all 0.8s ease;}
+.box:hover .card2{transform: translateX(220px);
+	transition: all 0.8s ease;}
+
+/**마우스를 뗄 때도 움직이는 스타일 적용되려면 아래처럼 따로**/
+/**https://ironsky.tistory.com/46**/
+.package {transform: translateX(0px); transition: all 0.8s ease;}
+.card {transform: translateX(0px); transition: all 0.8s ease;}
+.card2 {transform: translateX(0px); transition: all 0.8s ease;}
+
+.twelve{
+	margin-top: 5px;
+	text-align: center;
+}
+
+.info{
+	padding-left: 65px;
+
+}
+
+.info h1, h3{
+	overflow: hidden;
+}
+
+.name{
+	float: left;
+	margin-top: 350px;
+}
+
+.price{
+	padding-left: 140px;
+	padding-top: 25px;
+	float:left;
+	margin-top: 350px;
+}
+
+.cardframe{
+	float: right;
+	padding-top: 200px;
+}
+
+.explanation{
+	width: 980px;
+	height:300px;
+	font-size: 25px;
+	box-sizing: border-box;
+	line-height: 1.9em;
+	position: relative;
+	top:50px;
+	text-align: left;
+	float: left;
+}
+
+.orderForm{
+	padding: 0px 65px;
+	margin-top: 200px;
+	position: absolute;
+}
+
+.orderForm label{
+	font-family: 'Pacifico', cursive;
+	font-size: 40px;
+}
+
+.orderForm input{
+	background-color: #102DFF;
+	border: #fff solid 1px;
+	width: 1135px;
+	height: 50px;
+	float:right;
+	color: #fff;
+	padding: 3px 20px;
+	font-size: 28px;
+	margin-top: 10px;
+	font-family: 'Noto Sans KR', sans-serif;
+	position: relative;
+	z-index: 4;
+}
+
+input[type=number]::-webkit-inner-spin-button {
+  width: 30px;
+  height: 30px;
+}
+
+::placeholder{
+color:#3850FF;
+}
+
+
+.formGroup{
+	margin-top: 0px;
+	padding-top: 30px;
+}
+
+
+.submitButton{
+	margin-top: 50px;
+	margin-left: 535px;
+	margin-bottom: 500px;
+	position: relative;
+	z-index: 9;
+}
+

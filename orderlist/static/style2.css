@@ -1,0 +1,84 @@
+*{margin:0;
+	padding:0;}
+
+.clr{
+	clear: both;
+}
+
+
+.headline{
+	float: left;
+}
+
+.logo{
+	float: left;
+	width:10%;
+	height: auto;
+	margin-left:40px;
+	margin-top: 15px;
+}
+
+
+
+body{
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 2vw;
+	background-color: #102DFF;
+	color: #fff;
+	margin-top: 0;
+	margin: 10px;
+}
+
+h1 {
+	font-size: 6vw;
+	font-family: 'Pacifico', cursive;
+	font-weight: normal;
+}
+
+header {
+	overflow: hidden;
+	font-size: 2vw;
+	font-family: 'Pacifico', cursive;
+	font-weight: normal;
+	margin-bottom: 20px;
+}
+
+.listName{
+	width: 20%;
+	float: left;
+}
+.listQuantity{
+	width:15%;
+	float: left;
+}
+.listAddress{
+	width:40%;
+	float: left;
+}
+.listMobile{
+	width:20%;
+	float: left;
+}
+
+
+/**추가 되는 주문 **/
+.oneOrder{
+	margin-bottom: 8px;
+}
+
+.oneName{
+	width: 20%;
+	float: left;
+}
+.oneQuantity{
+	width:15%;
+	float: left;
+}
+.oneAddress{
+	width:40%;
+	float: left;
+}
+.oneMobile{
+	width:20%;
+	float: left;
+}

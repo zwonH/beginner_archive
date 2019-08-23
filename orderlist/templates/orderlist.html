@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Olinka Photo Card Order List</title>
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:500|Pacifico&display=swap&subset=korean" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style2.css') }}">
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script>
+        function get_order() {
+            $('#orderListBox').empty('');
+            $.ajax({
+              type: "GET",
+              url: "/order",
+              data: {},
+              success: function(response){
+                let orders = response['order_list'];
+                  for (let i = 0 ; i<orders.length; i++) {
+                    let name = orders [i]['name'];
+                    let quantity = orders [i]['quantity'];
+                    let address = orders [i]['address'];
+                    let mobile = orders [i]['mobile'];
+
+                    add_list(name, quantity, address, mobile);
+                  }
+                }
+              })
+        }
+
+        window.onload=function(){ get_order();}
+
+
+        function add_list(name, quantity, address, mobile){
+            var oneOrderList = '<div class= "oneOrder">\
+                <div class = "oneName"> '+name+' </div>\
+                <div class = "oneQuantity">'+quantity+'</div>\
+                <div class = "oneAddress">'+address+'</div>\
+                <div class = "oneMobile">'+mobile+'</div>\
+                <div class="clr">\
+                </div>';
+
+            $('#orderListBox').append(oneOrderList);
+        }
+
+
+    </script>
+
+
+</head>
+
+<body>
+    <div class="headline">
+        <h1>Olinka Photo Card Order List</h1>
+    </div>
+    <div >
+        <img class= "logo" src="static/images/logoWhite.png" id="logo">
+    </div>
+    <div class="clr"></div>
+    <header>
+        <div class = "listName"> Name:</div>
+        <div class = "listQuantity">Quantity:</div>
+        <div class = "listAddress">Address:</div>
+        <div class = "listMobile">Mobile:</div>
+        <div class="clr"></div>
+    </header>
+
+
+    <div id="orderListBox" class= "orderListBoxWrap">
+        <div class="oneOrder">
+            <div class = "oneName"> 한지원</div>
+            <div class = "oneQuantity">1</div>
+            <div class = "oneAddress">서울</div>
+            <div class = "oneMobile">010-0222-2222</div>
+            <div class="clr"></div>
+        </div>
+
+        <div class="oneOrder">
+                <div class = "oneName"> 한지원</div>
+                <div class = "oneQuantity">1</div>
+                <div class = "oneAddress">서울</div>
+                <div class = "oneMobile">010-0222-2222</div>
+                <div class="clr"></div>
+            </div>
+
+
+
+
+    </div>
+
+
+
+</body>
+</html>
