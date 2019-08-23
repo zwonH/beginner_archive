@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>zwon's Link Memo</title>
+
+    <!--flask render_template 사용 시, css 링크-->
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+
+    <!-- 구글 폰트 -->
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:400,700|Syncopate:400,700&display=swap"
+        rel="stylesheet">
+
+    <!-- Jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+</head>
+
+<body>
+    <div class="header">
+        <h1> link archive </h1>
+        <p class="wtbc">Websites to be checked. by zwon</p>
+        <button id="button_open_id" onclick="openClose()" class="button_open" type="button">
+            ☁️
+        </button>
+    </div>
+
+    <div id="form_box_id" class="form_box">
+        <form>
+            <div class="form_part">
+                <label for="controlInput1">url :</label>
+                <input type="text" id="posting_url_id" class="form_control" placeholder="paste the link">
+            </div>
+
+            <div class="form_part">
+                <label for="controlInput2">comment :</label>
+                <input type="text" id="posting_comment_id" class="form_control" placeholder="what do I think about it?">
+            </div>
+
+            <div class="button_save" onclick="posting()"></div>
+
+        </form>
+    </div>
+
+    <div id="card_container_id" class="card_container">
+
+        <!-- <div class="card">
+            <div class="card_image"
+                style="background-image: url(https://greatoceanroadmelbournetours.com.au/wp-content/uploads/2015/04/koala-sleeping.jpg)">
+            </div>
+            <div class="card_body">
+                <h2 class="card_title">LINk 제목입니다 adc</h2>
+                <p class="card_text">기사 내용이 들어갑니다.</p>
+                <p class="card_comment">코멘트가 남습니다.</p>
+            </div>
+        </div> -->
+
+
+
+
+        <div class="clr"></div>
+    </div> <!-- card_container 끝나는 곳-->
+
+
+</body>
+
+<!-- 포스팅들을 불러오는 함수는 getPosting()
+        이게 창을 켤때마다 자동으로 실행되어서 여태까지의 posting을 자동으로 보여줘야하니까
+        페이지 로딩이 끝나면 getPosting 함수가 자동으로 시작되게 끔 -->
+<script>
+    window.onload = function () {
+        getPosting();
+    }
+
+    function getPosting() {
+        $('#card_container_id').empty('');
+        $.ajax({
+            type: "GET",
+            url: "/post",
+            data: {},
+            success: function (response) {
+                let cards = response['articles'];
+                for (let i = 0; i < cards.length; i++) {
+                    let url = cards[i]['url'];
+                    let comment = cards[i]['comment'];
+                    let title = cards[i]['title'];
+                    let image = cards[i]['image'];
+                    let desc = cards[i]['desc'];
+                    // 여기에서 아까 만들어놓은 makeCard 함수를 적용해주는 것!!!
+                    makeCard(url, comment, title, image, desc);
+                }
+            }
+        })
+    }
+
+
+
+    // <!--카드를 만들어 붙여주는 함수
+
+    function makeCard(url, comment, title, image, desc) {
+        let oneCard = '<div class="card">\
+                        <div class="card_image"\
+                            style="background-image: url(' + image + ')">\
+                        </div>\
+                        <div class="card_body">\
+                            <a class="card_title" target="_blank" href="' + url + '">' + title + '</a>\
+                            <p class="card_text">' + desc + '...</p>\
+                            <p class="card_comment">"' + comment + '"</p>\
+                        </div>\
+                    </div>'
+        $('#card_container_id').append(oneCard);
+    }
+
+
+
+
+    // <
+    // !--이제 input에 url과 comment를 작성 후 button_save 버튼을 눌러주면,
+    // ajax를 통해 건내주는 것!!!
+    //     저장은 flask 쪽에서...
+    //     저장이 잘 됐다면(잘 보내졌다면) 제대로 저장이 됐다고 alert!-- >
+
+    function posting() {
+        let url = $('#posting_url_id').val();
+        let comment = $('#posting_comment_id').val();
+        console.log(url, comment);
+        // debugger
+        $.ajax({
+            type: "POST",
+            url: "/post",
+            data: {
+                url_give: url,
+                comment_give: comment
+            },
+            success: function (response) {
+                console.log(response);
+                console.log('success,', response);
+                if (response['result'] == 'success') {
+                    alert('성공적으로 저장!🌟');
+                    window.location.reload();
+                } else {
+                    alert('저장 오류 ⛈')
+                }
+            },
+            error: function (errorAlert) {
+                alert('저장 오류 ⛈')
+            }
+        })
+    }
+
+    // function posting() {
+    //     // 읽기
+    //     let url = $('#posting_url_id').val();
+    //     let comment = $('#posting_comment_id').val();
+    //     console.log(url, comment);
+    //     // debugger
+    //     // alert(url + ' / ' + comment);
+    //     $.ajax({
+    //         type: "POST", // POST 방식으로 요청하겠다.
+    //         url: "/post", // /post라는 url에 요청하겠다.
+    //         data: {
+    //             url_give: url,
+    //             comment_give: comment
+    //         }, // 데이터를 주는 방법
+    //         success: function (result) { // 성공하면
+    //             console.log(result); // 콘솔 창에 결과를 찍어주자
+    //         }
+    //     })
+
+    // }
+
+
+
+
+    //     <
+    //     !--button_open_id를 누르면 form_box_id가 열렸다 닫혔다
+    // block(열린) 상태에서 누르면 hide + 구름 이모지
+    // else(즉, none, 닫힌) 상태에서 누르면 show!+무지개 이모지!-- >
+
+    function openClose() {
+        if ($('#form_box_id').css('display') == 'block') {
+            $('#form_box_id').hide();
+            $('#button_open_id').text('☁️')
+        } else {
+            $('#form_box_id').show();
+            $('#button_open_id').text('🌈')
+        }
+    }
+</script>
+
+
+</html>
