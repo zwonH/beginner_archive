@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/static/style1.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='style1.css')}}">
+    <!--Jquery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <title>waYou</title>
 </head>
 
@@ -22,44 +24,127 @@
         </div>
         <div class="whiteBox"></div>
         <div class="img"></div>
-        <textarea class="dansang" placeholder="그대의 짧은 단상..." maxlength="40" type="text" name="dansang"></textarea>
-        <div class="buttonSave">
+        <textarea class="dansang" id="dansang_id" placeholder="그대의 짧은 단상..." maxlength="50" type="text"
+            name="dansang"></textarea>
+        <div class="buttonSave" id="buttonSave_id" onclick="postComment()" onMouseOver="this.innerHTML='📸'"
+            onMouseOut="this.innerHTML='📷'">
             📷
         </div>
     </div>
     <!--container class end-->
 
-    <div class="textContainer">
+    <div class="textContainer" id="textContainer_id">
         <div class="spaceBox">
             <br><br><br><br><br>
         </div>
-        <div class="textBox">
+        <!-- <div class="textBox">
             나 여기 가봤어!
-        </div>
-        <div class="textBox">
+        </div> -->
+        <!-- <div class="textBox">
             This place is so beautiful. I wonder where it is.
-        </div>
-        <div class="textBox">
-            나 여기 가봤어!
-        </div>
-        <div class="textBox">
-            This place is so beautiful. I wonder where it is.
-        </div>
-        <div class="textBox">
-            나 여기 가봤어!
-        </div>
-        <div class="textBox">
-            This place is so beautiful. I wonder where it is.
-        </div>
-        <div class="textBox">
-            나 여기 가봤어!
-        </div>
-        <div class="textBox">
-            This place is so beautiful. I wonder where it is.
-        </div>
+        </div> -->
+
     </div>
     <!--textContainer class end-->
 
 </body>
+
+<script>
+    $('#buttonSave_id').hide();
+    //* buttonHide()함수만으로는 reload 시, button이 자동으로 다시 나타나서 위의 코드 추가
+
+    window.onload = function () {
+        getComment();
+    }
+    //* 처음에 버튼이 hide 되긴 하지만, 글자를 쓴다고 해서 실시간으로 버튼이 뜨지는 않음
+    // if ($('#dansang_id').is(':empty')) {
+    //     $('#buttonSave_id').hide()
+    // } else {
+    //     $('#buttonSave_id').show()
+    // };
+
+    //* 아예 처음부터 버튼 show 됨
+    // if ($('#dansang_id').value == "") {
+    //     $('#buttonSave_id').hide()
+    // } else {
+    //     $('#buttonSave_id').show()
+    // };
+
+    //* 아래 코드 정상적으로 작동!!!
+    $(document).keyup('.code_textarea', function () {
+        let content = $.trim($('#dansang_id').val());
+        if (content.length === 0) {
+            $('#buttonSave_id').hide();
+        } else {
+            $('#buttonSave_id').show();
+        }
+    });
+
+
+
+
+    //* 최근 코멘트가 위로 올라가야 하는데, 이러면 아래로 내려감
+    // function getComment() {
+    //     $.ajax({
+    //         type: "GET",
+    //         url: "/post",
+    //         data: {},
+    //         success: function (response) {
+    //             let textBoxes = response['comments'];
+    //             for (let i = 0; i < textBoxes.length; i++) {
+    //                 let comment = textBoxes[i]['comment'];
+    //                 makeTextBox(comment);
+    //             }
+    //         }
+    //     })
+    // }
+
+    //* 최근 코멘트가 위로 가게끔 수정
+    function getComment() {
+        $.ajax({
+            type: "GET",
+            url: "/post",
+            data: {},
+            success: function (response) {
+                let textBoxes = response['comments'];
+                for (let i = textBoxes.length - 1; i > -1; i--) {
+                    let comment = textBoxes[i]['comment'];
+                    makeTextBox(comment);
+                }
+            }
+        })
+    }
+
+    function makeTextBox(comment) {
+        let oneTextBox = '<div class="textBox">\
+             ' + comment + ' </div>'
+        $('#textContainer_id').append(oneTextBox);
+    }
+
+    function postComment() {
+        let comment = $('#dansang_id').val();
+        console.log(comment);
+
+        $.ajax({
+            type: "POST",
+            url: "/post",
+            data: {
+                comment_give: comment
+            },
+            success: function (response) {
+                if (response['result'] == 'success') {
+                    alert('찰칵');
+                    window.location.reload();
+                } else {
+                    alert('왜지... 저장 오류...')
+                }
+            },
+            error: function (errorAlert) {
+                alert('왜지... 저장 오류...')
+            }
+        })
+    }
+</script>
+
 
 </html>

@@ -104,7 +104,11 @@ body {
 
     font-size: 3vw;
     line-height: 3.6vw;
+
+    cursor: pointer;
 }
+
+
 
 .textContainer {
     /* border: green 1px solid; */
