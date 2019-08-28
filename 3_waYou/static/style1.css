@@ -33,32 +33,44 @@ body {
     display: block;
     text-align: center;
     width: 24vw;
+    cursor: pointer;
 }
+
+/* .pointer {
+    font-size: 3vw;
+    display: block;
+    position: fixed;
+    left: 15vw;
+    top: 4vw;
+} */
 
 .whiteBox {
     width: 24vw;
     height: 35vw;
     background-color: #fff;
-    position: relative;
+
 }
 
 .img {
     /* border: 1px black solid; */
-    background-color: blue;
+    /* background-color: blue; */
     width: 19vw;
     height: 19vw;
+    background-size: cover;
     position: relative;
     left: 2.5vw;
     top: -30.5vw;
 }
 
+
+
 .dansang {
     /* border: 1px red solid; */
     width: 17vw;
     height: 11vw;
-    position: relative;
-    left: 3.5vw;
-    top: -24.5vw;
+    position: fixed;
+    left: 11.5vw;
+    top: 40.8vw;
     display: block;
     background-color: transparent;
     /** 스크롤바 제거 **/
@@ -77,6 +89,14 @@ body {
     line-height: 3.6vw;
 }
 
+/*relative의 경우
+/* .dansang {
+    position: relative;
+    left: 3.5vw;
+    top: -24.5vw;
+} */
+
+
 /** 클릭했을 때, 회색 테두리 제거 **/
 .dansang:focus {
     border: 0 none #FFF;
@@ -93,11 +113,13 @@ body {
     display: none;
 }
 
+
+
 .buttonSave {
     /* border: 1px red solid; */
-    position: relative;
-    top: -32vw;
-    left: 21.5vw;
+    position: fixed;
+    top: 44vw;
+    left: 29.5vw;
     width: 4vw;
     text-align: right;
 
@@ -108,7 +130,12 @@ body {
     cursor: pointer;
 }
 
-
+/* relative의 경우
+/* .buttonSave {
+    position: relative;
+    top: -32vw;
+    left: 21.5vw;
+} */
 
 .textContainer {
     /* border: green 1px solid; */

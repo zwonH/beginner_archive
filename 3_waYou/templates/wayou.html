@@ -19,13 +19,18 @@
 
 
     <div class="container">
-        <div class="buttonShow">
+        <!-- <div class="pointer" id="pointer_id">👉🏿</div> -->
+        <div class="buttonShow" id="buttonShow_id" onclick="showImage()">
             🕳
         </div>
+
         <div class="whiteBox"></div>
-        <div class="img"></div>
+        <div class="img" id="img_id"
+            style="background-image: url(https://scontent-icn1-1.cdninstagram.com/vp/67be7fa9727692af48e6c6689ba5991f/5DF28950/t51.2885-15/sh0.08/e35/c241.0.958.958a/s640x640/67958276_495605281276114_1188700465217584978_n.jpg?_nc_ht=scontent-icn1-1.cdninstagram.com)">
+        </div>
         <textarea class="dansang" id="dansang_id" placeholder="그대의 짧은 단상..." maxlength="50" type="text"
             name="dansang"></textarea>
+
         <div class="buttonSave" id="buttonSave_id" onclick="postComment()" onMouseOver="this.innerHTML='📸'"
             onMouseOut="this.innerHTML='📷'">
             📷
@@ -51,6 +56,8 @@
 
 <script>
     $('#buttonSave_id').hide();
+    $('#img_id').hide();
+    $('#dansang_id').hide();
     //* buttonHide()함수만으로는 reload 시, button이 자동으로 다시 나타나서 위의 코드 추가
 
     window.onload = function () {
@@ -81,7 +88,15 @@
     });
 
 
-
+    function showImage() {
+        if ($('#img_id').css('display') == 'block') {
+            $('#buttonShow_id').text('?');
+        } else {
+            $('#img_id').show();
+            $('#dansang_id').show();
+            $('#pointer_id').hide();
+        }
+    }
 
     //* 최근 코멘트가 위로 올라가야 하는데, 이러면 아래로 내려감
     // function getComment() {

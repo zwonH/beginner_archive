@@ -5,15 +5,14 @@ from pymongo import MongoClient
 client = MongoClient('localhost', 27017)
 db = client.waYou
 
-import requests
-from bs4 import BeautifulSoup
+
 
 
 @app.route('/')
 def home():
     return '와유'
 
-@app.route('/main')
+@app.route('/wayou')
 def main():
     return render_template('wayou.html')
 
