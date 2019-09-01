@@ -21,12 +21,15 @@
     <h1 class="wayou">와유</h1>
 
     <div class="container">
+      <!-- <div class="pointer" id="pointer_id">👉🏿</div> -->
       <div class="buttonShow" id="buttonShow_id" onclick="changeImage()">
         🕳
       </div>
 
       <div class="whiteBox">
-        <div id="imgWrap_id"></div>
+        <div id="imgWrap_id">
+          <!-- <div class="img" id="img_id" style="background-image: src()"></div> -->
+        </div>
         <textarea
           class="dansang"
           id="dansang_id"
@@ -51,6 +54,12 @@
 
     <div class="textContainer" id="textContainer_id">
       <div class="spaceBox"><br /><br /><br /><br /><br /></div>
+      <!-- <div class="textBox">
+            나 여기 가봤어!
+        </div> -->
+      <!-- <div class="textBox">
+            This place is so beautiful. I wonder where it is.
+        </div> -->
     </div>
     <!--textContainer class end-->
   </body>
@@ -85,6 +94,12 @@
       });
     }
 
+    // 이미지 링크를 받아오면 링크가 적용된 이미지 박스를 자동으로 생성
+    // function pushImage() {
+    //   this.getImgLink();
+    //   this.makeImage();
+    // }
+
     // 페이지 로드되면 자동으로 크롤링을 시작해서 이미지 링크를 받아놓는다
     function getImgLink() {
       $.ajax({
@@ -97,6 +112,30 @@
         }
       });
     }
+
+    // // 받아온 이미지 링크로 이미지 만들기
+    // function makeImage(imgLink) {
+    //   let imgBox =
+    //     '<div class="img" id="img_id"\
+    //         style="background-image: url(' +
+    //     imgLink +
+    //     ')">\
+    //     </div>';
+    //   $("#imgWrap_id").append(imgBox);
+    // }
+
+    // src 추가 버전
+    // function changeImage(imgLink) {
+    //   if (document.getElementById("#img_id").src == null) {
+    //     if (imgLink == null) {
+    //       alert("not ready");
+    //     } else {
+    //       document.getElementById("#img_id").src = imgLink;
+    //     }
+    //   } else {
+    //     $("#buttonShow_id").text("?");
+    //   }
+    // }
 
     // div 추가 버전
     function changeImage() {
@@ -119,6 +158,35 @@
         }
       }
     }
+
+    // 이미지 링크가 만들어졌으면 버튼 속 텍스트가 달라지게...
+    // $(document).keyup(".code_textarea", function() {
+    //   let imageLink = $.trim(imgLink.val());
+    //   if (imageLink === 0) {
+    //     $("#buttonShow_id").hide();
+    //   } else {
+    //     $("#buttonShow_id").show();
+    //   }
+    // });
+    // function alertLoaded() {
+    //   //   if ($("#img_id").css("display") == "block") {
+    //   if ($("#img_id") == undefined) {
+    //     $("#buttonShow_id").text("🕳");
+    //   } else {
+    //     $("#buttonShow_id").text("기다려봐");
+    //   }
+    // }
+
+    // 검정 버튼을 누르면 이미지와 textarea 나타나게끔
+    // function showImage() {
+    //   if ($("#img_id").css("display") == "block") {
+    //     $("#buttonShow_id").text("?");
+    //   } else {
+    //     $("#imgWrap_id").show();
+    //     $("#dansang_id").show();
+    //     // $("#pointer_id").hide();
+    //   }
+    // }
 
     // textarea에 글자 입력 시작 시 자동으로 버튼이 나타남
     //* 아래 코드 정상적으로 작동!!!

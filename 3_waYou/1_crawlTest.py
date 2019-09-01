@@ -4,16 +4,28 @@ import random
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
+
+
 # 해시태그 랜덤으로 선택하여 주소 생성
 address = "https://www.instagram.com/explore/tags/"
-hashtag_list = ["travel", "desert", "amazon", "ocean"]
+hashtag_list = ["travel", "desert", "ocean", "europe", "beach", "landscape", "hawaii", "eiffeltower"]
 hashtag = random.choice(hashtag_list)
 
 url = address + hashtag
 
 # for selenium...
+
 DRIVER_DIR = "/Applications/chromedriver"
-driver = webdriver.Chrome(DRIVER_DIR)
+
+options = webdriver.ChromeOptions()
+options.add_argument('headless')
+options.add_argument('window-size=1920x1080')
+options.add_argument("disable-gpu")
+
+driver = webdriver.Chrome(DRIVER_DIR, options=options)
+
+# driver = webdriver.Chrome(DRIVER_DIR)
+
 driver.implicitly_wait(5)
 driver.get(url)
 elem = driver.find_elements_by_tag_name("body")
@@ -23,7 +35,7 @@ img_list = []
 
 pagedowns = 1
 
-while pagedowns < 3:
+while pagedowns < 2:
     elem[0].send_keys(Keys.PAGE_DOWN)
     time.sleep(1)
     img = driver.find_elements_by_css_selector('.EZdmt .KL4Bh img')
